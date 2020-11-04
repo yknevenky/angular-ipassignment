@@ -1,0 +1,111 @@
+<div class="container">
+  <hr class="my-4" />
+  <h2 class="display-4 text-center">Fill in the details for us to reach you</h2>
+  <hr class="my-4" />
+  <form #formNg="ngForm" class="my-5">
+    <div class="form-group">
+      <label for="fname">First Name</label>
+      <input
+        type="text"
+        id="fname"
+        #fname="ngModel"
+        name="fname"
+        class="form-control"
+        [class.is-invalid]="!fname.valid"
+        [(ngModel)]="user.fname"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="lname">Last Name</label>
+      <input
+        type="text"
+        #lname="ngModel"
+        name="lname"
+        id="lname"
+        [class.is-invalid]="!lname.valid"
+        class="form-control"
+        [(ngModel)]="user.lname"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="email-id">Email id</label>
+      <input
+        type="email"
+        #emailID="ngModel"
+        id="email-id"
+        name="emailID"
+        class="form-control"
+        [class.is-invalid]="!emailID.valid"
+        [(ngModel)]="user.email"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="ph-no">Phone number</label>
+      <input
+        type="number"
+        id="ph-no"
+        name="phNo"
+        #phNo="ngModel"
+        class="form-control"
+        [class.is-invalid]="!phNo.valid"
+        [(ngModel)]="user.phNo"
+        pattern="^[6-9]\d{9}$"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="genderdiv">Gender</label>
+      <div id="genderdiv">
+        <div *ngFor="let g of genderList" class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            name="gender"
+            id="{{ g }}"
+            value="{{ g }}"
+            #gender="ngModel"
+            type="radio"
+            [class.is-invalid]="!gender.valid"
+            [(ngModel)]="user.gender"
+            required
+          />
+          <label class="form-check-label" for="{{ g }}">{{ g }}</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="department">Department</label>
+      <select
+        class="form-control"
+        name="department"
+        #dep="ngModel"
+        id="department"
+        [class.is-invalid]="!dep.valid"
+        [(ngModel)]="user.dep"
+        required
+      >
+        <option *ngFor="let d of depList" value="{{ d }}">{{ d }}</option>
+      </select>
+    </div>
+    <div class="form-check mb-3">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        name="agree"
+        id="agree"
+        [(ngModel)]="checked"
+        required
+      />
+      <label class="form-check-label" for="agree"
+        >Agree to the terms and conditions</label
+      >
+    </div>
+    <button routerLink="/" [disabled]="!formNg.valid" class="btn btn-success btn-lg justify-content-center">
+      Submit
+    </button>
+  </form>
+</div>
+<p>{{ formNg.value | json }}</p>
+<p>{{ user.fname }}</p>
